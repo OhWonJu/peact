@@ -1,6 +1,6 @@
 # peact
 
-React 직접 구현하기 첼린지
+React 직접 구현하기 챌린지
 
 # Week 1
 
@@ -11,6 +11,7 @@ React 직접 구현하기 첼린지
       [회고](https://common-sheet-da1.notion.site/Pio-React-Peact-13beae65a96f802aafc6c045d5db8186)
       
 
-- [ ] CreateElement 적용 및 virtual DOM 생성
+- [x] CreateElement 적용 및 virtual DOM 생성
+      [회고](https://common-sheet-da1.notion.site/createElement-Virtual-DOM-13feae65a96f80a8a6b6c44eaec9fdd7?pvs=74)
 
 - [ ] 예제 컴포넌트 생성
