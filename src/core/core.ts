@@ -43,8 +43,6 @@ function createElement(type: any, props: any, ...children: any[]) {
     Object.freeze(element);
   }
 
-  console.log(element);
-
   return element;
 }
 
@@ -69,5 +67,25 @@ function createTextElement(text: string) {
 
   return element;
 }
+function render(element: any, container: DomNode) {
+  const dom =
+    element.type === "TEXT_ELEMENT"
+      ? document.createTextNode(element.props.nodeValue) // createTextNode 를 통해 리프노드 생성
+      : document.createElement(element.type); // 최종적으로 HTML 태그에 대응하는 타입만 남게되므로 DOM 요소 생성
 
-export { createElement, fragment };
+  // 프로퍼티 처리
+  const isProperty = (key: string) => key !== "children";
+
+  Object.keys(element.props)
+    .filter(isProperty)
+    .forEach((name) => {
+      // prop name : porp valeu
+      dom[name] = element.props[name];
+    });
+
+  // 자식 요소들 렌더링 - 재귀
+  element.props.children.forEach((child: any) => render(child, dom));
+  container.appendChild(dom);
+}
+
+export { createElement, render, fragment };
