@@ -16,6 +16,10 @@ function App() {
     <div id="app">
       Hello <Title title="Peact!" />
       <Descrition text="create own React" />
+      <>
+        <p>fragment</p>
+        how can i handle it?
+      </>
     </div>
   );
 }
