@@ -1,6 +1,5 @@
 export enum FiberEffectTag {
-    Deletion = "DELETION",
-    Update = "UPDATE",
-    Placement = "PLACEMENT"
-  }
-  
+  Deletion = "DELETION",
+  Update = "UPDATE",
+  Placement = "PLACEMENT",
+}

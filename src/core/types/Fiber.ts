@@ -11,4 +11,5 @@ export interface Fiber {
   parent?: Fiber;
   child?: Fiber;
   sibling?: Fiber;
+  hooks?: any[];
 }
