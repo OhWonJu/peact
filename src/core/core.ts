@@ -233,6 +233,8 @@ function updateFunctionComponent(fiber: Fiber) {
   // 함수형 컴포넌트는 fiber.dom 만 존재하는 것이 아닌 추가적인 기능을 내포하고 있음 (state, hook 등)
   // 함수형 fiber 는 로직과 자식 fiber 를 가지고 있음
   PeactValueUI.wipFiber = fiber; // work in progress 상태인 fiber 지정
+  PeactValueUI.wipFiber.hooks = [];
+  PeactValueUI.hookIndex = 0; // 해당 fiber hook 목록 인덱스
 
   // type 이 함수라는 것은 해당 fiber 는 host 혹은 function fiber 만을 가지고 있다는 것. (즉 자신이 host 가 될 수 없다는 것)
   let childrenComponents = undefined;
