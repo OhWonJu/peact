@@ -6,6 +6,7 @@ interface PeactValueUIProps {
   deletions: Fiber[];
   wipFiber: Fiber;
   nextUnitOfWork?: Fiber;
+  hookIndex: number;
 }
 
 export const PeactValueUI = {} as PeactValueUIProps;
