@@ -1,9 +1,12 @@
+import { SyntheticMouseEvent } from "@/core/eventDispather";
 import { useState } from "@/core/useState";
 
 const Counter = () => {
   const [count, setCount] = useState<number>(1);
 
-  const handlePlus = () => {
+  const handlePlus = (e: SyntheticMouseEvent) => {
+    console.log(e);
+    e.stopPropagation();
     setCount(count + 1);
   };
 
@@ -13,7 +16,7 @@ const Counter = () => {
 
   return (
     <div>
-      <button onClick={handlePlus}>+</button>
+      <button onClick={(e) => handlePlus(e)}>+</button>
       <span>{count}</span>
       <button onClick={handleMiuns}>-</button>
     </div>
