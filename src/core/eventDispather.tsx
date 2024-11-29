@@ -1,4 +1,3 @@
-import { ChangeEvent } from "react";
 import { DomNode } from "./types/DomNode";
 
 type SyntheticEvent = {
