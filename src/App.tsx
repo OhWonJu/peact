@@ -1,6 +1,4 @@
-import { ChangeEvent } from "react";
 import Counter from "./components/Counter";
-import { SyntheticOnChangeEvent } from "./core/eventDispather";
 import { useState } from "./core/useState";
 
 const Descrition = ({ text }: { text: string }) => {
