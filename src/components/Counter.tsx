@@ -1,5 +1,5 @@
+import { useState } from "@/core/peact";
 import { SyntheticMouseEvent } from "@/core/eventDispather";
-import { useState } from "@/core/useState";
 
 const Counter = () => {
   const [count, setCount] = useState<number>(1);

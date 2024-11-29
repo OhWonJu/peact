@@ -1,5 +1,6 @@
+import { useState } from "@core/peact";
+
 import Counter from "./components/Counter";
-import { useState } from "./core/useState";
 
 const Descrition = ({ text }: { text: string }) => {
   return (
