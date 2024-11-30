@@ -6,7 +6,6 @@ type SyntheticEvent = {
   target: EventTarget | null;
   preventDefault: () => void;
   stopPropagation: () => void;
-  [key: string]: any;
 };
 
 export type SyntheticMouseEvent = SyntheticEvent & {
@@ -18,14 +17,14 @@ export type SyntheticOnChangeEvent = SyntheticEvent & {
   value: any;
 };
 
-type EventListenerRegistry = Map<DomNode, Map<string, EventListener>>;
-
-const eventListenerRegistry: EventListenerRegistry = new Map();
-
 type EventListener = {
   realType: string;
   listener: EventListenerOrEventListenerObject;
 };
+
+type EventListenerRegistry = Map<DomNode, Map<string, EventListener>>;
+
+const eventListenerRegistry: EventListenerRegistry = new Map();
 
 function createSyntheticEvent(event: Event): SyntheticEvent {
   return {
