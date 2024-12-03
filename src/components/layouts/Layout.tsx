@@ -1,6 +1,7 @@
 import { FormSchema } from "@/types/stepFromState";
-import { Button } from "../ui";
 import { formValidator } from "@/lib/utils";
+
+import { Button } from "../ui";
 
 interface LayoutProps {
   children: any;

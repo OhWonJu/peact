@@ -1,7 +1,7 @@
+import { formValueInitializer } from "@/lib/utils";
 import { FormSchema } from "@/types/stepFromState";
 
 import { Button, SectionWrapper, StepWrapper } from "@/components";
-import { formValueInitializer } from "@/lib/utils";
 
 interface StepThreeProps {
   isActive: boolean;
