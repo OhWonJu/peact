@@ -4,6 +4,7 @@ import { SyntheticMouseEvent } from "@/core/eventDispather";
 const Counter = () => {
   const [count, setCount] = useState<number>(1);
 
+
   const handlePlus = (e: SyntheticMouseEvent) => {
     console.log(e);
     e.stopPropagation();
