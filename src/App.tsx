@@ -1,3 +1,5 @@
+import Counter from "./components/Counter";
+
 const Descrition = ({ text }: { text: string }) => {
   return (
     <div>
@@ -26,6 +28,8 @@ function App() {
       Hello <Title title="Peact!" />
       <Descrition text="create own React" />
       <Frag />
+      <Counter />
+      <Counter />
     </div>
   );
 }
