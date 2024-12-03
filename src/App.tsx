@@ -1,3 +1,5 @@
+import { useEeffect, useState } from "@core/peact";
+
 import Counter from "./components/Counter";
 
 const Descrition = ({ text }: { text: string }) => {
@@ -23,6 +25,28 @@ const Frag = () => {
 };
 
 function App() {
+  const [text, setText] = useState("");
+  const [active, setActive] = useState(false);
+
+  const inputHandler = (e: any) => {
+    console.log(e);
+    setText(e.value);
+  };
+
+  useEeffect(() => {
+    const handler = (e: MouseEvent) => {
+      console.log(e);
+    };
+
+    if (active) {
+      window.addEventListener("mousemove", handler);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handler);
+    };
+  }, [active]);
+
   return (
     <div id="app">
       Hello <Title title="Peact!" />
@@ -30,6 +54,11 @@ function App() {
       <Frag />
       <Counter />
       <Counter />
+      <input onChange={inputHandler} />
+      <span>{text}</span>
+      <button onClick={() => setActive((prev) => !prev)}>
+        {active ? "deactive" : "active"}
+      </button>
     </div>
   );
 }

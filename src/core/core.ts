@@ -1,3 +1,7 @@
+import {
+  addSyntheticEventListener,
+  removeSyntheticEventListener,
+} from "./eventDispather";
 import { RequestIdleCallbackDeadline } from "./Global";
 import { PeactValueUI } from "./PeactValueUI";
 import { DomNode } from "./types/DomNode";
@@ -84,8 +88,8 @@ function updateDom(dom: DomNode, prevProps: any, nextProps: any) {
     .filter(isEvent)
     .filter((key) => !(key in nextProps) || isNew(prevProps, nextProps)(key)) // 새로운 이벤트에 없거나, 새롭게 이벤트가 새롭게 변경된 경우
     .forEach((name) => {
-      const eventType = name.toLowerCase().substring(2); // on"C"lick
-      dom.removeEventListener(eventType, prevProps[name]);
+      removeSyntheticEventListener(dom, name);
+      // dom.removeEventListener(eventType, prevProps[name]);
     });
 
   // Remove old properties
@@ -109,8 +113,8 @@ function updateDom(dom: DomNode, prevProps: any, nextProps: any) {
     .filter(isEvent)
     .filter(isNew(prevProps, nextProps))
     .forEach((name) => {
-      const eventType = name.toLowerCase().substring(2);
-      dom.addEventListener(eventType, nextProps[name]);
+      addSyntheticEventListener(dom, name, nextProps[name]);
+      // dom.addEventListener(eventType, nextProps[name]);
     });
 }
 
