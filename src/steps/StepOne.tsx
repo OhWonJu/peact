@@ -10,6 +10,7 @@ import {
 
 interface StepOneProps {
   isActive: boolean;
+  formStep: boolean[];
   formStepAction: Function;
   formValue: FormSchema;
   setFormValue: Function;
@@ -17,19 +18,23 @@ interface StepOneProps {
 
 const StepOne = ({
   isActive,
+  formStep,
   formStepAction,
   formValue,
   setFormValue,
 }: StepOneProps) => {
   const checkFormCompleted = (newState: Step1FormState) => {
+    const newFormStep = formStep;
     if (
       typeof newState.option !== "undefined" &&
       typeof newState.checkboxes !== "undefined" &&
       newState.checkboxes.length > 0
     ) {
-      formStepAction(true);
+      newFormStep[0] = true;
+      formStepAction(newFormStep);
     } else {
-      formStepAction(false);
+      newFormStep[0] = false;
+      formStepAction(newFormStep);
     }
   };
 

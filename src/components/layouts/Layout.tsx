@@ -8,7 +8,7 @@ interface LayoutProps {
   step: number;
   maxStep: number;
   setStep: Function;
-  isStepFormCompleted: boolean;
+  isStepFormCompleted: boolean[];
   formValue: FormSchema;
 }
 
@@ -40,7 +40,7 @@ const Layout = ({
         {step < maxStep - 1 && (
           <Button
             variant="PLAIN"
-            disable={!isStepFormCompleted}
+            disable={!isStepFormCompleted[step]}
             onClick={forwardStepHandler}
           >
             <span>다음</span>

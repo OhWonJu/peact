@@ -10,7 +10,9 @@ import { Layout, SectionWrapper, Title } from "./components";
 function App() {
   const stepMap = [StepOne, StepTwo, StepThree];
   const [step, setStep] = useState(0);
-  const [isStepFormCompleted, setStepFormCompleted] = useState(false);
+  const [isStepFormCompleted, setStepFormCompleted] = useState(
+    Array(stepMap.length).fill(false)
+  );
 
   const [formValue, setFormValue] = useState<FormSchema>(
     formValueInitializer()
@@ -32,6 +34,7 @@ function App() {
           <Step
             isActive={index === step}
             key={index}
+            formStep={isStepFormCompleted}
             formStepAction={
               index === stepMap.length - 1 ? setStep : setStepFormCompleted
             }
