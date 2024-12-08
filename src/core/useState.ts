@@ -29,16 +29,24 @@ export function useState<T>(
   }
 
   const setState = (action: T | ((prevState: T) => T)) => {
-    hook.queue.push(action);
+    const newState =
+      typeof action === "function"
+        ? (action as (prevState: T) => T)(hook.state)
+        : action;
 
-    PeactValueUI.wipRoot = {
-      dom: PeactValueUI.currentRoot.dom,
-      props: PeactValueUI.currentRoot.props,
-      alternate: PeactValueUI.currentRoot,
-    };
+    // 상태가 변경되었을 때만 큐에 추가하고 리렌더링
+    if (newState !== hook.state) {
+      hook.queue.push(action);
 
-    PeactValueUI.nextUnitOfWork = PeactValueUI.wipRoot;
-    PeactValueUI.deletions = [];
+      PeactValueUI.wipRoot = {
+        dom: PeactValueUI.currentRoot.dom,
+        props: PeactValueUI.currentRoot.props,
+        alternate: PeactValueUI.currentRoot,
+      };
+
+      PeactValueUI.nextUnitOfWork = PeactValueUI.wipRoot;
+      PeactValueUI.deletions = [];
+    }
   };
 
   return [hook.state, setState];

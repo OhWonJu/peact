@@ -171,8 +171,11 @@ function commitWork(fiber?: Fiber) {
 }
 
 function commitDeletion(domParent: DomNode, fiber?: Fiber) {
-  if (fiber && fiber.dom) domParent.removeChild(fiber.dom);
-  else if (fiber && fiber.child) commitDeletion(domParent, fiber.child);
+  if (fiber && fiber.dom) {
+    if (domParent.contains(fiber.dom)) {
+      domParent.removeChild(fiber.dom);
+    }
+  } else if (fiber && fiber.child) commitDeletion(domParent, fiber.child);
 }
 
 function render(element: any, container: DomNode) {
