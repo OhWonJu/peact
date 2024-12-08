@@ -7,6 +7,15 @@ import { StepOne, StepThree, StepTwo } from "./steps";
 
 import { Layout, SectionWrapper, Title } from "./components";
 
+const Frag = () => {
+  return (
+    <>
+      <p>fragment</p>
+      how can i handle it?
+    </>
+  );
+};
+
 function App() {
   const stepMap = [StepOne, StepTwo, StepThree];
   const [step, setStep] = useState(0);
