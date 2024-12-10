@@ -1,64 +1,48 @@
-import { useEeffect, useState } from "@core/peact";
+import { useState } from "./core/peact";
 
-import Counter from "./components/Counter";
+import { formValueInitializer } from "./lib/utils";
+import { FormSchema } from "./types/stepFromState";
 
-const Descrition = ({ text }: { text: string }) => {
-  return (
-    <div>
-      this is
-      <span> {text}</span>
-    </div>
-  );
-};
+import { StepOne, StepThree, StepTwo } from "./steps";
 
-const Title = ({ title }: { title: string }) => {
-  return <h1>{title}</h1>;
-};
-
-const Frag = () => {
-  return (
-    <>
-      <p>fragment</p>
-      how can i handle it?
-    </>
-  );
-};
+import { Layout, SectionWrapper, Title } from "./components";
 
 function App() {
-  const [text, setText] = useState("");
-  const [active, setActive] = useState(false);
+  const stepMap = [StepOne, StepTwo, StepThree];
+  const [step, setStep] = useState(0);
+  const [isStepFormCompleted, setStepFormCompleted] = useState(
+    Array(stepMap.length).fill(false)
+  );
 
-  const inputHandler = (e: any) => {
-    console.log(e);
-    setText(e.value);
-  };
-
-  useEeffect(() => {
-    const handler = (e: MouseEvent) => {
-      console.log(e);
-    };
-
-    if (active) {
-      window.addEventListener("mousemove", handler);
-    }
-
-    return () => {
-      window.removeEventListener("mousemove", handler);
-    };
-  }, [active]);
+  const [formValue, setFormValue] = useState<FormSchema>(
+    formValueInitializer()
+  );
 
   return (
-    <div id="app">
-      Hello <Title title="Peact!" />
-      <Descrition text="create own React" />
-      <Frag />
-      <Counter />
-      <Counter />
-      <input onChange={inputHandler} />
-      <span>{text}</span>
-      <button onClick={() => setActive((prev) => !prev)}>
-        {active ? "deactive" : "active"}
-      </button>
+    <div id="app" className="w-[100dvw] h-[100dvh] py-6 bg-purple-100">
+      <Layout
+        step={step}
+        setStep={setStep}
+        maxStep={stepMap.length - 1}
+        isStepFormCompleted={isStepFormCompleted}
+        formValue={formValue}
+      >
+        <SectionWrapper>
+          <Title title="Survey" />
+        </SectionWrapper>
+        {stepMap.map((Step, index) => (
+          <Step
+            isActive={index === step}
+            key={index}
+            formStep={isStepFormCompleted}
+            formStepAction={
+              index === stepMap.length - 1 ? setStep : setStepFormCompleted
+            }
+            formValue={formValue}
+            setFormValue={setFormValue}
+          />
+        ))}
+      </Layout>
     </div>
   );
 }

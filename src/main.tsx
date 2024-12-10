@@ -1,5 +1,7 @@
 import { render } from "@core/peact";
 
+import "./style.css";
+
 import App from "./App";
 
 const rootElement = <App />;
